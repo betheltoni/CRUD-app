@@ -47,5 +47,5 @@
   "devDependencies": {
     "react-router-dom": "^6.3.0"
   },
-  "homepage" : "https://betheltoni.github.io/CRUD-app"
+  "homepage": "http://betheltoni.github.io/CRUD-app"
 }
