@@ -45,7 +45,8 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "gh-pages": "^3.2.3"
   },
   "homepage": "http://betheltoni.github.io/CRUD-app"
 }
