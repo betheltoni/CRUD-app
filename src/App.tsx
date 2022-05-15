@@ -18,10 +18,14 @@ function App() {
 
   useEffect(()=> {
     const fetchData = async () => {
+      try {
         const response = await api.get('');
         // console.log(response.data);
         setData(response.data);
-      
+      } catch (err:any) {
+        console.log(err);
+        console.log(err.message);
+      }      
     }
     fetchData();
   }, [])
@@ -37,9 +41,15 @@ function App() {
 
   const removeDataHandler = () => {
     const deleteData =async () => {
-      const response = await api.delete(`/ ${id}`);
+      try {
+        const response = await api.delete(`/ ${id}`);
       // console.log(response);
       alert("Your post has been deleted");
+      } catch (err:any) {
+        console.log(err);
+        console.log(err.message);
+      }
+      
     }
     deleteData();
   }
@@ -47,9 +57,14 @@ function App() {
   const updateDataHandler = (updatedDatum:any) => {
     console.log(updatedDatum);
     const updateData= async () => {
-      const response = await api.put(`/${Number(updatedDatum.id)}`);
+      try {
+        const response = await api.put(`/${Number(updatedDatum.id)}`);
       console.log(response);
       alert("Your post has been updated")
+      } catch (err:any) {
+        console.log(err);
+        console.log(err.message);
+      }
     }
     updateData();
   }
@@ -67,7 +82,7 @@ function App() {
       <Routes>
         <Route path='/update' element={<Update updateDataHandler={updateDataHandler} />} />
         <Route path='/create' element={<Create addDataHandler={addDataHandler} />} />
-        <Route path='/' element={<Read data={data} removeDataId={removeDataHandler} />} />
+        <Route path='/CRUD-app/' element={<Read data={data} removeDataId={removeDataHandler} />} />
       </Routes>
       </BrowserRouter>
     </div>

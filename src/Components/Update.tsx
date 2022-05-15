@@ -23,10 +23,17 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
   // console.log(key);
 
   const retrieveData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)!);
-  // console.log(retrieveData);
+  console.log(retrieveData);
 
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const dataValue = retrieveData.filter((datum:any) => {
+    console.log(datum.id, Number(key));
+    return datum.id === Number(key);
+  })
+  console.log(dataValue);
+  console.log(dataValue[0].id, dataValue[0].title, dataValue[0].body);
+
+  const [title, setTitle] = useState(dataValue[0].title);
+  const [body, setBody] = useState(dataValue[0].body);
   let id = key;
 
   let navigate = useNavigate();
@@ -34,7 +41,7 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
   const update = (e:any) => {
     e.preventDefault();
     if(title === '' || body === ''){
-      alert("All feilds are mandatory");
+      alert("All fields are mandatory");
       return;
   }
     const put = retrieveData.map((datum:any) => {
@@ -53,7 +60,7 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(put));
     setTitle("");
     setBody("");
-    navigate("/");
+    navigate("/CRUD-app/");
   }
 
   return (
@@ -72,7 +79,7 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
     </div>
     <div className='form-btn-wrapper'>
     <button className='button-update'>Save</button>
-    <Link to="/">
+    <Link to="/CRUD-app/">
         <button className='button-delete'>Back</button>
     </Link>
     </div>

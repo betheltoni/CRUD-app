@@ -11,13 +11,13 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
     const create = (e:any) => {
         e.preventDefault();
         if(title === '' || body === ''){
-            alert("All feilds are mandatory");
+            alert("All fields are mandatory");
             return;
         }
         addDataHandler({title, body})
         setTitle("");
         setBody("");
-        navigate("/");
+        navigate("/CRUD-app/");
 
     }
   return (
@@ -36,7 +36,7 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
        </div>
        <div className='form-btn-wrapper'>
        <button className='button-update'>Save</button>
-       <Link to="/">
+       <Link to="/CRUD-app/">
            <button className='button-delete'>Back</button>
        </Link>
        </div>
