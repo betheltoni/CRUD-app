@@ -14,6 +14,7 @@ import api from "./Components/api/Post";
 function App() {
   const LOCAL_STORAGE_KEY = "data";
   const [data, setData] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
   const id = Math.floor(Math.random() * 1000) + 1;
 
   useEffect(()=> {
@@ -22,6 +23,7 @@ function App() {
         const response = await api.get('');
         // console.log(response.data);
         setData(response.data);
+        setLoading(false);
       } catch (err:any) {
         console.log(err);
         console.log(err.message);
@@ -34,7 +36,7 @@ function App() {
     const createData =async () => {
       const response = await api.post('');
       // console.log(response);
-      alert(`Your post has been ${response.statusText}`);
+      alert(`Your post has been created`);
     }
     createData();
   }

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReadTable from './ReadTable'
-
+import api from "./api/Post";
 
 const Read = (props:any) => {
     // const data =[
@@ -26,6 +26,22 @@ const Read = (props:any) => {
     //     }
     
     //   ]
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<any>([]);
+    useEffect(()=> {
+        const fetchData = async () => {
+          try {
+            const response = await api.get('');
+            // console.log(response.data);
+            setData(response.data);
+            setLoading(false);
+          } catch (err:any) {
+            console.log(err);
+            console.log(err.message);
+          }      
+        }
+        fetchData();
+      }, [])
 
     const deleteDataHandler = (id:any) => {
       props.removeDataId(id);
@@ -34,14 +50,14 @@ const Read = (props:any) => {
 
 
 
-    const renderTable = props.data.map((datum:any, index:number) => {
+    const renderTable = data.map((datum:any, index:number) => {
         return(
             <ReadTable data={datum} key={index} clickHandler={deleteDataHandler} />
         )
     })
   return (
     <div>
-      <Link to="/create">
+        {loading ? (<p>loading data ...</p>) : ( <div><Link to="/create">
           <button className='create-button'>Create</button>
       </Link>
       <table className='read-table'>
@@ -67,7 +83,9 @@ const Read = (props:any) => {
             </tbody>
         </table>
       
-      {renderTable}
+      {renderTable} </div>)}
+        
+     
     </div>
   )
 }
