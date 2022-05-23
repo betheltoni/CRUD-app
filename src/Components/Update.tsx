@@ -40,10 +40,6 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
 
   const update = (e:any) => {
     e.preventDefault();
-    if(title === '' || body === ''){
-      alert("All fields are mandatory");
-      return;
-  }
     const put = retrieveData.map((datum:any) => {
       console.log(Number(key), datum.id);
       if(Number(key) === datum.id){
@@ -67,13 +63,13 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
     <form className='create' onSubmit={update} >
     <div className='form-control'>
         <label>Title</label>
-        <input type="text" placeholder='Add Title' value={title} onChange={(e) => {
+        <input type="text" placeholder='Add Title' required value={title} onChange={(e) => {
             setTitle(e.target.value)
         }} />
     </div>
     <div className='form-control'>
         <label>Body</label>
-        <input type="text" placeholder='Add Title' value={body} onChange={(e) => {
+        <input type="text" placeholder='Add Title' required value={body} onChange={(e) => {
             setBody(e.target.value)
         }} />
     </div>

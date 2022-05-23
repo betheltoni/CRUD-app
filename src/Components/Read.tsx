@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ReadTable from './ReadTable'
 import api from "./api/Post";
+import Error from './Error';
 
 const Read = (props:any) => {
     // const data =[
@@ -27,6 +28,7 @@ const Read = (props:any) => {
     
     //   ]
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [data, setData] = useState<any>([]);
     useEffect(()=> {
         const fetchData = async () => {
@@ -38,10 +40,12 @@ const Read = (props:any) => {
           } catch (err:any) {
             console.log(err);
             console.log(err.message);
+            setError(err.message);
+            console.log(error);
           }      
         }
         fetchData();
-      }, [])
+      }, [error])
 
     const deleteDataHandler = (id:any) => {
       props.removeDataId(id);
@@ -57,7 +61,10 @@ const Read = (props:any) => {
     })
   return (
     <div>
-        {loading ? (<p>loading data ...</p>) : ( <div><Link to="/create">
+      { 
+      error ? ( <div> < Error errorMessage={error} /> </div> ) :
+      loading ? (<p>loading data ....</p>) :
+      ( <div><Link to="/create">
           <button className='create-button'>Create</button>
       </Link>
       <table className='read-table'>
@@ -83,9 +90,7 @@ const Read = (props:any) => {
             </tbody>
         </table>
       
-      {renderTable} </div>)}
-        
-     
+      {renderTable} </div>) }
     </div>
   )
 }

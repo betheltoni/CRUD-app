@@ -15,6 +15,7 @@ function App() {
   const LOCAL_STORAGE_KEY = "data";
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const id = Math.floor(Math.random() * 1000) + 1;
 
   useEffect(()=> {
@@ -27,10 +28,12 @@ function App() {
       } catch (err:any) {
         console.log(err);
         console.log(err.message);
+        setError(err.message);
+            console.log(error);
       }      
     }
     fetchData();
-  }, [])
+  }, [error])
  
   const addDataHandler = () => {
     const createData =async () => {

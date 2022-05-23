@@ -10,10 +10,6 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
 
     const create = (e:any) => {
         e.preventDefault();
-        if(title === '' || body === ''){
-            alert("All fields are mandatory");
-            return;
-        }
         addDataHandler({title, body})
         setTitle("");
         setBody("");
@@ -24,13 +20,13 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
    <form className='create' onSubmit={create} >
        <div className='form-control'>
            <label>Title</label>
-           <input type="text" placeholder='Add Title' value={title} onChange={(e) => {
+           <input type="text" placeholder='Add Title' required value={title} onChange={(e) => {
                setTitle(e.target.value)
            }} />
        </div>
        <div className='form-control'>
            <label>Body</label>
-           <input type="text" placeholder='Add Title' value={body} onChange={(e) => {
+           <input type="text" placeholder='Add Title' required value={body} onChange={(e) => {
                setBody(e.target.value)
            }} />
        </div>
