@@ -56,7 +56,7 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(put));
     setTitle("");
     setBody("");
-    navigate("/CRUD-app/");
+    navigate("/");
   }
 
   return (
@@ -75,7 +75,7 @@ const Update = ({updateDataHandler}:{updateDataHandler:any}) => {
     </div>
     <div className='form-btn-wrapper'>
     <button className='button-update'>Save</button>
-    <Link to="/CRUD-app/">
+    <Link to="/">
         <button className='button-delete'>Back</button>
     </Link>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import {  HashRouter, Route, Routes } from 'react-router-dom'
 import './App.scss';
 import Create from './Components/Create';
 import Header from './Components/Header';
@@ -12,29 +12,42 @@ import api from "./Components/api/Post";
 
 
 function App() {
-  const LOCAL_STORAGE_KEY = "data";
-  const [data, setData] = useState<any>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const LOCAL_STORAGE_KEY = "data";
+  // const [data, setData] = useState([]);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(true);
   const id = Math.floor(Math.random() * 1000) + 1;
 
-  useEffect(()=> {
-    const fetchData = async () => {
-      try {
-        const response = await api.get('');
-        // console.log(response.data);
-        setData(response.data);
-        setLoading(false);
-      } catch (err:any) {
-        console.log(err);
-        console.log(err.message);
-        setError(err.message);
-            console.log(error);
-      }      
-    }
-    fetchData();
-  }, [error])
+  // useEffect(()=> {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await api.get('');
+  //       // console.log(response.data);
+  //       setData(response.data);
+  //       setLoading(false);
+  //     } catch (err:any) {
+  //       console.log(err);
+  //       console.log(err.message);
+  //       setError(err.message);
+  //           console.log(error);
+  //     }      
+  //   }
+  //   fetchData();
+  // }, [error])
  
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await api.get('');
+  //       setData(response.data);
+  //     } catch (err:any) {
+  //       console.log(err);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [])
+
   const addDataHandler = () => {
     const createData =async () => {
       const response = await api.post('');
@@ -76,20 +89,20 @@ function App() {
 
   
 
-  useEffect(()=>{
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-  }, [data])
+  // useEffect(()=>{
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+  // }, [data])
 
   return (
     <div className="App">
       <Header/>
-      <BrowserRouter>
+      <HashRouter>
       <Routes>
         <Route path='/update' element={<Update updateDataHandler={updateDataHandler} />} />
         <Route path='/create' element={<Create addDataHandler={addDataHandler} />} />
-        <Route path='/CRUD-app/' element={<Read data={data} removeDataId={removeDataHandler} />} />
+        <Route path='/' element={<Read  removeDataId={removeDataHandler}  />} />
       </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

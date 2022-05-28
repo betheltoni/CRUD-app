@@ -5,6 +5,7 @@ import api from "./api/Post";
 import Error from './Error';
 
 const Read = (props:any) => {
+
     // const data =[
 
     //     {
@@ -27,6 +28,7 @@ const Read = (props:any) => {
     //     }
     
     //   ]
+    const LOCAL_STORAGE_KEY = "data";
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState<any>([]);
@@ -46,6 +48,10 @@ const Read = (props:any) => {
         }
         fetchData();
       }, [error])
+
+      useEffect(()=>{
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+      }, [data])
 
     const deleteDataHandler = (id:any) => {
       props.removeDataId(id);

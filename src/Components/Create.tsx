@@ -13,7 +13,7 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
         addDataHandler({title, body})
         setTitle("");
         setBody("");
-        navigate("/CRUD-app/");
+        navigate("/");
 
     }
   return (
@@ -32,7 +32,7 @@ const Create = ({addDataHandler}: {addDataHandler:any}) => {
        </div>
        <div className='form-btn-wrapper'>
        <button className='button-update'>Save</button>
-       <Link to="/CRUD-app/">
+       <Link to="/">
            <button className='button-delete'>Back</button>
        </Link>
        </div>
